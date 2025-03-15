@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+        /*160. 相交链表
+
+        给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+
+        图示两个链表在节点 c1 开始相交：*/
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val) {
+         *     this.val = val;
+         *     this.next = null;
+         * }
+         */
+
+        /**
+         * @param {ListNode} headA
+         * @param {ListNode} headB
+         * @return {ListNode}
+         */
+        // var getIntersectionNode = function(headA, headB) {
+        //     if (headA === null || headB === null) {
+        //         return null;
+        //     }
+        //     let pA=headA,pB=headB;
+        //     while(pA!==pB){
+        //         pA=pA===null?headB:pA.next;
+        //         pB=pB===null?headA:pB.next;
+        //     }
+        //     return pA;
+        // };
+        /*function ListNode(val) {
+            this.val = val;
+            this.next = null;
+        }*/
+        var getIntersectionNode = function(headA, headB) {
+            const set=new Set();
+            while(headA!==null){
+                set.add(headA);
+                headA=headA.next;
+            }
+            while(headB!==null){
+                if(set.has(headB)){
+                    return headB;
+                }
+                headB=headB.next;
+            }
+            return null;
+
+        };
+
+
+
+
+        /*206. 反转链表
+
+        给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。*/
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @return {ListNode}
+         */
+        /*function ListNode(val, next) {
+            this.val = (val===undefined ? 0 : val)
+            this.next = (next===undefined ? null : next)
+        }*/
+        var reverseList = function(head) {
+            let prev=null;
+            while(head!==null){
+                let temp=head.next;
+                head.next=prev;
+                prev=head;
+                head=temp;
+            }
+
+            return prev;
+        };
+
+
+
+
+
+        /*234. 回文链表
+
+        给你一个单链表的头节点 head ，请你判断该链表是否为
+        回文链表
+        。如果是，返回 true ；否则，返回 false 。*/
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @return {boolean}
+         */
+        var isPalindrome = function(head) {
+            const arr=[];
+            while(head!==null){
+                arr.push(head.val);
+                head=head.next;
+            }
+            for(let i=0,j=arr.length-1;i<j;i++,--j){
+                if(arr[i]!==arr[j]){
+                    return false;
+                }
+            }
+            return true;
+        };
+
+
+        // 递归方法
+        let frontPointer;
+        const recursivelyCheck=(currentNode)=>{
+            if(currentNode!==null){
+                if(!recursivelyCheck(currentNode.next)){
+                    return false;
+                }
+                if(currentNode.val!==frontPointer.val){
+                    return false;
+                }
+                frontPointer=frontPointer.next;
+            }
+            return true;
+        }
+        var isPalindrome =function(head){
+            frontPointer=head;
+            return recursivelyCheck(head);
+        };
+
+
+
+        /*141. 环形链表
+
+        给你一个链表的头节点 head ，判断链表中是否有环。
+
+        如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。*/
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val) {
+         *     this.val = val;
+         *     this.next = null;
+         * }
+         */
+
+        /**
+         * @param {ListNode} head
+         * @return {boolean}
+         */
+        var hasCycle = function(head) {
+            let set=new Set();
+            while(head!==null){
+                if(set.has(head)){
+                    return true;
+                }
+                set.add(head);
+                head=head.next;
+            }
+            return false;
+        };
+
+
+        /*21. 合并两个有序链表
+
+        将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 */
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} list1
+         * @param {ListNode} list2
+         * @return {ListNode}
+         */
+        var mergeTwoLists = function(list1, list2) {
+            let p=new ListNode(-1);
+            let prev=p;
+            while(list1!==null||list2!==null){
+                if(list1===null){
+                    p.next=list2;
+                    break;
+                }
+                if(list2===null){
+                    p.next=list1;
+                    break;
+                }
+                if(list1.val<list2.val){
+                    p.next=list1;
+                    list1=list1.next;
+                }else{
+                    p.next=list2;
+                    list2=list2.next;
+                }
+                p=p.next
+            }
+            return prev.next;
+        };
+
+
+        /*2. 两数相加
+
+        给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+
+        请你将两个数相加，并以相同形式返回一个表示和的链表。
+
+        你可以假设除了数字 0 之外，这两个数都不会以 0 开头。*/
+
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} l1
+         * @param {ListNode} l2
+         * @return {ListNode}
+         */
+        var addTwoNumbers = function(l1, l2) {
+            let sum=new ListNode(-1);
+            let start=sum;
+            let forward=0;
+            while(l1!==null||l2!==null){
+                let val1= l1!==null?l1.val:0;
+                let val2= l2!==null?l2.val:0;
+
+                sum.next=new ListNode((val1+val2+forward)%10);
+                forward=Math.floor((val1+val2+forward)/10)
+                if(l1!==null) l1=l1.next;
+                if(l2!==null) l2=l2.next;
+                sum=sum.next;
+            }
+            if(forward===1){
+                sum.next=new ListNode(1);
+            }
+            return start.next;
+        };
+
+
+
+
+
+
+        /*19. 删除链表的倒数第 N 个结点
+
+        给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。*/
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @param {number} n
+         * @return {ListNode}
+         */
+        var removeNthFromEnd = function(head, n) {
+            let ptr=head;
+            let length=0;
+
+            while(ptr!==null){
+                ptr=ptr.next;
+                length++;
+            }
+
+            ptr=head;
+            for(let i=0;i<length-n-1;i++){
+                ptr=ptr.next;
+            }
+
+            if(n===length){
+                head=head.next;
+                return head;
+            }
+
+            ptr.next=ptr.next.next;
+
+            return head;
+        };
+        var removeNthFromEnd = function(head, n) { // 双指针快慢
+            // 创建一个哨兵节点，指向头节点，以便处理头节点被删除的情况
+            let dummy = new ListNode(0);
+            dummy.next = head;
+
+            let first = dummy;
+            let second = dummy;
+
+            // 移动第一个指针，使得它领先第二个指针 n + 1 个节点
+            for (let i = 0; i <= n; i++) {
+                first = first.next;
+            }
+
+            // 移动两个指针直到第一个指针到达链表末尾
+            while (first !== null) {
+                first = first.next;
+                second = second.next;
+            }
+
+            // 删除第 n 个节点
+            second.next = second.next.next;
+
+            // 返回链表的头节点
+            return dummy.next;
+        };
+
+
+
+
+        // 24. 两两交换链表中的节点
+        //
+        // 给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @return {ListNode}
+         */
+        var swapPairs = function(head) {
+            let dummy=new ListNode(0,head);
+            let temp=dummy;
+            while(temp.next!==null&&temp.next.next!==null){
+                let node1=temp.next;
+                let node2=temp.next.next;
+                temp.next=node2;
+                node1.next=node2.next;
+                node2.next=node1;
+                temp=node1;
+            }return dummy.next;
+
+        };
+
+        // 递归
+        var swapPairs = function(head) {
+            if (head === null|| head.next === null) {
+                return head;
+            }
+            const newHead = head.next;
+            head.next = swapPairs(newHead.next);
+            newHead.next = head;
+            return newHead;
+        };
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

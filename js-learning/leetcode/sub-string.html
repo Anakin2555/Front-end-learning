@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // 560. 和为 K 的子数组
+        //
+        // 给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的子数组的个数 。
+        //
+        // 子数组是数组中元素的连续非空序列。
+        /**
+         * @param {number[]} nums
+         * @param {number} k
+         * @return {number}
+         */
+        var subarraySum = function(nums, k) {
+            let count = 0;
+            for(let s = 0; s<nums.length;s++){
+                let sum = 0;
+                for(let e = s; e<nums.length; e++){
+                    sum +=nums[e];
+                    if(sum === k){
+                        count++;
+                    }
+                }
+            }
+            return count;
+        };
+
+
+
+        // 239. 滑动窗口最大值
+        //
+        // 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+        //
+        // 返回 滑动窗口中的最大值 。
+        /**
+         * @param {number[]} nums
+         * @param {number} k
+         * @return {number[]}
+         */
+        var maxSlidingWindow = function(nums, k) {
+            //单调队列套路
+            // 入（元素进入队尾，同时维护队列单调性）
+            // 出（元素离开队首）
+            // 记录/维护答案（根据队首）
+            let ans = [];
+            let q = [];
+            for(let i=0;i<nums.length;i++){
+                // 入列
+                while(q.length&&nums[q[q.length-1]]<=nums[i]){
+                    q.pop();
+                }
+                q.push(i);
+                // 出列
+                if(i-q[0]>=k){
+                    q.shift();
+                }
+
+                if(i>=k-1){
+                    ans.push(nums[q[0]]);
+                }
+            }
+            return ans;
+
+        };
+
+
+
+
+
+        // 76. 最小覆盖子串
+        //
+        // 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+        /**
+         * @param {string} s
+         * @param {string} t
+         * @return {string}
+         */
+        var minWindow = function(s, t) {
+            let l = 0
+            let r = 0
+            const need = new Map()
+            for(let c of t){
+                need.set( c,need.has(c) ? need.get(c) + 1 : 1)
+            }
+        
+            let needType = need.size
+            let res = ''
+            while(r<s.length){
+                let c = s[r]
+                if(need.has(c)){
+                    need.set( c,need.get(c) -1 )
+                    if( need.get(c) === 0) needType -= 1
+                }
+                while(needType === 0){
+                    const newRes = s.substring(l,r+1)
+                    if( !res || newRes.length < res.length ) res = newRes
+                    const c2 = s[l]
+                    if(need.has(c2)){
+                        need.set(c2,need.get(c2) + 1)
+                        if( need.get(c2) === 1 ) needType += 1
+                    }
+                    l += 1
+                }
+                r += 1
+            }
+            return res
+        };
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

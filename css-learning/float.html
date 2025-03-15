@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Float 示例及清除浮动</title>
+    <style>
+        /* 公共样式 */
+        
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+        }
+        
+        h1,
+        h2,
+        p {
+            text-align: center;
+        }
+        
+        .container {
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            margin: 20px auto;
+            padding: 10px;
+            width: 80%;
+        }
+        
+        .box {
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+        }
+        /* 清除浮动方法 1：使用 overflow */
+        
+        .clearfix-overflow {
+            overflow: auto;
+        }
+        /* 清除浮动方法 2：使用伪元素 clearfix */
+        
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Float 示例及清除浮动</h1>
+
+    <h2>未清除浮动的情况</h2>
+    <div class="container">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+    <p>注意：由于子元素浮动被脱离了正常文档流，容器的高度未能自动扩展，从而出现高度塌陷的问题。</p>
+
+    <h2>使用 overflow 清除浮动</h2>
+    <div class="container clearfix-overflow">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+    <p>说明：通过给容器设置 <code>overflow: auto;</code>，让其创建新的块级格式化上下文，从而包含所有浮动元素，容器高度正常。</p>
+
+    <h2>使用伪元素 clearfix 清除浮动</h2>
+    <div class="container clearfix">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+    </div>
+    <p>说明：通过在容器后添加一个伪元素，并用 <code>clear: both;</code> 清除浮动，使容器能正确扩展高度。</p>
+</body>
+
+</html>

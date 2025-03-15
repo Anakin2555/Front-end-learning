@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+        // 闭包：函数执行的上下文环境
+        // 闭包是什么：使外部函数有权访问内部函数作用域，有权访问父作用域里的变量的函数，即使父函数关闭后，
+        // 闭包的形成：函数执行的上下文环境会一直存在，直到函数执行完毕
+        // 闭包的用途：保护变量，避免全局污染
+        // 闭包的缺点：内存泄漏
+        function fn() {
+            let num = 0
+            return () => {
+                num++
+                console.log(num)
+            }
+        }
+        let fn2 = fn()
+        let fn3 = fn() // 每次调用fn()都会创建一个新的闭包
+        fn2()
+        fn2()
+        fn2()
+        fn3()
+        fn3()
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

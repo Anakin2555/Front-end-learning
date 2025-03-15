@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS伪类和伪元素示例</title>
+    <style>
+        .example {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        .example::before {
+            content: "前置内容 - ";
+            color: red;
+        }
+        
+        .example::after {
+            content: " - 后置内容";
+            color: blue;
+        }
+        
+        .example::first-line {
+            font-weight: bold;
+        }
+        
+        .example::first-letter {
+            font-size: 2em;
+            color: green;
+        }
+        /* 链接伪类 */
+        
+        .links a {
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+        }
+        
+        .links a:hover {
+            color: #f00;
+            text-decoration: underline;
+        }
+        
+        .links a:visited {
+            color: #666;
+        }
+        
+        .links a:active {
+            color: #0f0;
+        }
+        /* 表单伪类 */
+        
+        .form-demo input {
+            margin: 10px;
+            padding: 5px;
+        }
+        
+        .form-demo input:focus {
+            outline: 2px solid #007bff;
+        }
+        
+        .form-demo input:disabled {
+            background-color: #eee;
+        }
+        /* 结构性伪类 */
+        
+        .list li {
+            padding: 5px;
+            margin: 5px;
+            background-color: #f0f0f0;
+        }
+        
+        .list li:first-child {
+            background-color: #ffeb3b;
+        }
+        
+        .list li:last-child {
+            background-color: #4caf50;
+        }
+        
+        .list li:nth-child(1) {
+            border-left: 3px solid #2196f3;
+        }
+        
+        .list li:nth-child(odd) {
+            border-right: 3px solid #ff5722;
+        }
+        /* 新增结构性伪类示例样式 */
+        
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        /* 为了更好地展示，给所有元素添加基础样式 */
+        
+        .container>* {
+            padding: 5px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+        }
+        /* first-child vs first-of-type */
+        
+        .demo1 div:first-child {
+            background-color: #ffeb3b;
+        }
+        
+        .demo2 div:first-of-type {
+            background-color: #4caf50;
+        }
+        /* nth-child vs nth-of-type */
+        
+        .demo3 div:nth-child(2) {
+            background-color: #2196f3;
+        }
+        
+        .demo4 div:nth-of-type(2) {
+            background-color: #ff5722;
+        }
+        /* only-child vs only-of-type */
+        
+        .demo5 div:only-child {
+            background-color: #9c27b0;
+        }
+        
+        .demo6 div:only-of-type {
+            background-color: #795548;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="example">这是一个示例文本，用于展示CSS伪元素的使用。</div>
+
+    <h2>链接伪类示例</h2>
+    <div class="links">
+        <a href="#1">链接1</a>
+        <a href="#2">链接2</a>
+        <a href="#3">链接3</a>
+    </div>
+
+    <h2>表单伪类示例</h2>
+    <div class="form-demo">
+        <input type="text" placeholder="普通输入框">
+        <input type="text" disabled placeholder="禁用的输入框">
+    </div>
+
+    <h2>结构性伪类示例</h2>
+    <ul class="list">
+        <li>第一个项目</li>
+        <li>第二个项目</li>
+        <li>第三个项目</li>
+        <li>第四个项目</li>
+        <li>第五个项目</li>
+    </ul>
+
+    <h2>结构性伪类详细示例</h2>
+
+    <h3>:first-child vs :first-of-type</h3>
+    <div class="container demo1">
+        <p>这是一个段落</p>
+        <div>第一个div</div>
+        <div>第二个div</div>
+    </div>
+
+    <div class="container demo2">
+        <p>这是一个段落</p>
+        <div>第一个div</div>
+        <div>第二个div</div>
+    </div>
+
+    <h3>:nth-child(2) vs :nth-of-type(2)</h3>
+    <div class="container demo3">
+        <p>这是一个段落</p>
+        <div>第一个div</div>
+        <div>第二个div</div>
+    </div>
+
+    <div class="container demo4">
+        <p>这是一个段落</p>
+        <div>第一个div</div>
+        <div>第二个div</div>
+    </div>
+
+    <h3>:only-child vs :only-of-type</h3>
+    <div class="container demo5">
+        <div>唯一的子元素</div>
+    </div>
+
+    <div class="container demo6">
+        <p>一个段落</p>
+        <div>唯一的div</div>
+        <p>另一个段落</p>
+    </div>
+</body>
+
+</html>

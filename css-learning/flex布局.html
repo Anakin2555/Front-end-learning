@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex布局示例</title>
+    <style>
+        /* 公共容器样式 */
+        
+        .container {
+            margin: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            border: 1px dashed #999;
+            padding: 10px;
+        }
+        
+        .flex-item {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        /* -------------------------------
+           1. 行方向（默认方向为 row）
+              - 主轴：水平
+              - 交叉轴：垂直
+        --------------------------------- */
+        
+        .row-direction {
+            flex-direction: row;
+            /* 显式设置成行方向 */
+            justify-content: space-around;
+            /* 水平分布 */
+            align-items: center;
+            /* 垂直居中 */
+            flex-wrap: nowrap;
+            /* 不换行 */
+        }
+        /* -------------------------------
+           2. 列方向
+              - 主轴：垂直
+              - 交叉轴：水平
+        --------------------------------- */
+        
+        .column-direction {
+            flex-direction: column;
+            justify-content: space-between;
+            /* 纵向平均分布 */
+            align-items: stretch;
+            /* 子项宽度自动填充 */
+        }
+        /* -------------------------------
+           3. flex-wrap 与 align-content 
+        --------------------------------- */
+        
+        .wrap-container {
+            flex-wrap: wrap;
+            align-content: space-around;
+            /* 多行时行间均匀分布 */
+            height: 200px;
+        }
+        /* -------------------------------
+           4. order 排序
+        --------------------------------- */
+        
+        .order-1 {
+            order: 1;
+        }
+        
+        .order-2 {
+            order: 2;
+        }
+        /* -------------------------------
+           5. Flex 单项属性示例
+              - flex-grow：扩展比例
+              - flex-shrink：收缩比例
+              - flex-basis：基准宽度/高度
+              - flex：三个属性的简写
+        --------------------------------- */
+        
+        .flex-grow {
+            flex-grow: 1;
+        }
+        
+        .flex-item-fixed {
+            flex: 0 1 80px;
+            /* 不扩展，允许收缩，基础宽度80px */
+        }
+        
+        .flex-shorthand {
+            /* flex-grow:1, flex-shrink:1, flex-basis:100px */
+            flex: 1 1 100px;
+        }
+        /* -------------------------------
+           6. align-self 单项属性
+             允许单个子项覆盖父容器的 align-items 设定
+        --------------------------------- */
+        
+        .self-start {
+            align-self: flex-start;
+        }
+        
+        .self-center {
+            align-self: center;
+        }
+        
+        .self-end {
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Flex布局完整示例</h1>
+
+    <!-- 1. 行方向 Flex 布局 -->
+    <div class="container">
+        <h2>行方向（flex-direction: row）</h2>
+        <div class="flex-container row-direction">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item flex-grow">Item 2 (flex-grow)</div>
+            <div class="flex-item flex-item-fixed">Item 3 (固定80px)</div>
+            <div class="flex-item" style="order: 1;">Item 4 (order:1)</div>
+            <div class="flex-item order-2">Item 5 (order:2)</div>
+            <div class="flex-item flex-shorthand">Item 6 (flex:1 1 100px)</div>
+        </div>
+    </div>
+
+    <!-- 2. 列方向 Flex 布局 -->
+    <div class="container">
+        <h2>列方向（flex-direction: column）</h2>
+        <!-- 设置一个高度以方便展示列方向的分布 -->
+        <div class="flex-container column-direction" style="height: 300px;">
+            <div class="flex-item">Item A</div>
+            <div class="flex-item flex-grow">Item B (flex-grow)</div>
+            <div class="flex-item flex-item-fixed">Item C (固定基准)</div>
+            <div class="flex-item" style="order: 1;">Item D (order:1)</div>
+            <div class="flex-item order-2">Item E (order:2)</div>
+            <div class="flex-item flex-shorthand">Item F (flex:1 1 100px)</div>
+        </div>
+    </div>
+
+    <!-- 3. flex-wrap 与 align-content 示例 -->
+    <div class="container">
+        <h2>Flex-wrap 与 align-content</h2>
+        <!-- 此处子项设置为固定宽度，容器宽度不足以同时容纳全部 -->
+        <div class="flex-container wrap-container row-direction">
+            <div class="flex-item" style="flex: 0 0 45%;">Item 1</div>
+            <div class="flex-item" style="flex: 0 0 45%;">Item 2</div>
+            <div class="flex-item" style="flex: 0 0 45%;">Item 3</div>
+            <div class="flex-item" style="flex: 0 0 45%;">Item 4</div>
+            <div class="flex-item" style="flex: 0 0 45%;">Item 5</div>
+            <div class="flex-item" style="flex: 0 0 45%;">Item 6</div>
+        </div>
+    </div>
+
+    <!-- 4. align-self 示例 -->
+    <div class="container">
+        <h2>align-self 示例</h2>
+        <!-- 此容器中默认 align-items 设置为 stretch -->
+        <div class="flex-container row-direction" style="height: 150px; align-items: stretch;">
+            <div class="flex-item self-start">Item 1 (align-self: flex-start)</div>
+            <div class="flex-item self-center">Item 2 (align-self: center)</div>
+            <div class="flex-item self-end">Item 3 (align-self: flex-end)</div>
+            <div class="flex-item">Item 4 (默认 align-self)</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

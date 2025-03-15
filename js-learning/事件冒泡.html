@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>事件冒泡示例</title>
+    <style>
+        .outer {
+            width: 300px;
+            height: 300px;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .middle {
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            padding: 20px;
+        }
+        .inner {
+            width: 100px;
+            height: 100px;
+            background: #999;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 基本结构：三层嵌套的div -->
+    <div class="outer" id="outer">
+        外层
+        <div class="middle" id="middle">
+            中层
+            <div class="inner" id="inner">
+                内层
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 2. 事件冒泡基础示例
+        const outer = document.getElementById('outer');
+        const middle = document.getElementById('middle');
+        const inner = document.getElementById('inner');
+
+        outer.addEventListener('click', function(e) {
+            console.log('outer 被点击');
+        });
+
+        middle.addEventListener('click', function(e) {
+            console.log('middle 被点击');
+        });
+
+        inner.addEventListener('click', function(e) {
+            console.log('inner 被点击');
+        });
+
+        // 3. 事件对象的重要属性和方法
+        inner.addEventListener('click', function(e) {
+            console.log('事件对象属性演示:');
+            console.log('e.target:', e.target.className);      // 实际触发事件的元素
+            console.log('e.currentTarget:', e.currentTarget.className); // 当前处理事件的元素
+            console.log('this:', this.className);             // 等同于 currentTarget
+        });
+
+        // 4. 阻止事件冒泡
+        middle.addEventListener('click', function(e) {
+            console.log('middle 被点击 - 阻止冒泡');
+            e.stopPropagation(); // 阻止事件继续冒泡
+        });
+
+        // 5. 事件委托（事件代理）
+        document.body.addEventListener('click', function(e) {
+            // 根据目标元素进行不同处理
+            if (e.target.className === 'inner') {
+                console.log('通过委托处理 inner 点击');
+            } else if (e.target.className === 'middle') {
+                console.log('通过委托处理 middle 点击');
+            }
+        });
+
+        // 6. 事件捕获
+        outer.addEventListener('click', function(e) {
+            console.log('outer 捕获阶段：');
+        }, true); // true 表示在捕获阶段处理
+
+        // 7. 阻止默认行为
+        document.querySelector('a').addEventListener('click', function(e) {
+            e.preventDefault(); // 阻止链接跳转
+        });
+
+        // 8. 自定义事件
+        const customEvent = new CustomEvent('myEvent', {
+            detail: { message: '这是自定义事件' },
+            bubbles: true,    // 允许冒泡
+            cancelable: true  // 允许取消
+        });
+
+        inner.addEventListener('myEvent', function(e) {
+            console.log('自定义事件:', e.detail.message);
+        });
+
+        // 触发自定义事件
+        inner.dispatchEvent(customEvent);
+    </script>
+</body>
+</html>

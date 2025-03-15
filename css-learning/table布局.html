@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table 布局示例</title>
+    <style>
+        /* ------------------------------
+       传统 HTML Table 布局示例
+    ------------------------------ */
+        
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            /* 合并边框 */
+            /* 使用固定表格布局可以确保各列按照比例分配宽度，常见面试考点 */
+            table-layout: fixed;
+        }
+        
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+        /* ------------------------------
+       使用 CSS 模拟 Table 布局示例
+       通过 div 模拟表格，使用 display: table/row/cell
+    ------------------------------ */
+        
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+            display: table;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        .table-row {
+            display: table-row;
+        }
+        
+        .table-cell {
+            display: table-cell;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .table-header {
+            background-color: #e67e22;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>传统 HTML Table 布局示例</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>职业</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>工程师</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>李四</td>
+                <td>设计师</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>王五</td>
+                <td>产品经理</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>CSS 模拟 Table 布局示例</h1>
+    <div class="table-container">
+        <div class="table-row">
+            <div class="table-cell table-header">序号</div>
+            <div class="table-cell table-header">姓名</div>
+            <div class="table-cell table-header">职业</div>
+        </div>
+        <div class="table-row">
+            <div class="table-cell">1</div>
+            <div class="table-cell">张三</div>
+            <div class="table-cell">工程师</div>
+        </div>
+        <div class="table-row">
+            <div class="table-cell">2</div>
+            <div class="table-cell">李四</div>
+            <div class="table-cell">设计师</div>
+        </div>
+        <div class="table-row">
+            <div class="table-cell">3</div>
+            <div class="table-cell">王五</div>
+            <div class="table-cell">产品经理</div>
+        </div>
+    </div>
+</body>
+
+</html>

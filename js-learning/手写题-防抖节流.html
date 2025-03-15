@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖与节流示例</title>
+</head>
+
+<body>
+
+    <button id="btn">点击</button>
+
+
+    <script>
+        
+        
+        
+        // 防抖
+        // 防抖函数：当连续触发事件时，只有在停止触发一段时间后，才执行一次函数
+        function debounce(fn,delay){
+            let timer=null
+            return function(...args){
+                if(timer) clearTimeout(timer)
+                timer=setTimeout(()=>{
+                    fn.apply(this,args)
+                },delay)
+            }   
+        }
+
+        // 节流
+        // 节流函数：无论事件触发有多频繁，保证在指定时间间隔内只执行一次
+        function throttle(fn,delay){
+            let lastTime=0
+            return function(...args){
+                const now=Date.now()
+                if(now-lastTime>delay){
+                    fn.apply(this,args)
+                    lastTime=now
+                }
+            }
+        }
+
+        // setTimeout的节流
+        // function throttle(fn,delay){
+        //     let timer=null
+        //     return function(...args){
+        //         if(!timer){
+        //             timer = setTimeout(() => {
+        //                 fn.apply(this, args)
+        //                 timer = null
+        //             }, delay)
+        //         }
+        //        
+        //     }   
+        // }
+        
+
+        // 示例点击处理函数
+        function handleClick() {
+            console.log('按钮点击了!');
+        }
+
+        // 获取按钮元素
+        const btn = document.getElementById('btn');
+
+        // 使用防抖：快速点击时，只有停止点击后1秒才执行一次
+        // btn.addEventListener('click', debounce(handleClick,1000));
+
+        // 使用节流：快速点击时，每隔1秒执行一次
+        btn.addEventListener('click', throttle(handleClick, 1000));
+
+
+        // 使⽤场景：
+        // 节流：滚动加载更多、⾼频点击 滚动事件 鼠标高频点击……
+        // 防抖：搜索框搜索输⼊，并在输⼊完以后⾃动搜索、⼿机号，邮箱验证输⼊检测、窗⼝⼤⼩resize变
+        // 化后，再重新渲染。
+
+        // 
+        // 对比项	防抖（Debounce）	节流（Throttle）
+        // 触发时机	事件停止触发后才执行	事件持续触发时，每隔一定时间执行一次
+        // 控制目标	减少函数调用次数，最后一次执行	限制执行频率，定期执行
+        // 适用场景	输入框搜索、表单提交、自动保存	滚动事件、鼠标移动、按钮点击
+
+        // 4. 何时用防抖，何时用节流？
+        // 如果希望“只触发最后一次”，用防抖（输入框、搜索请求）
+        // 如果希望“控制触发频率”，用节流（滚动加载、按钮点击）
+        
+        
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. 函数声明（最基础的方式）
+        function add(a, b) {
+            return a + b;
+        }
+
+        // 2. 函数表达式
+        const multiply = function(a, b) {
+            return a * b;
+        };
+
+        // 3. 箭头函数
+        const divide = (a, b) => {
+            return a / b;
+        };
+
+        // 箭头函数简写（单行可省略return和花括号）
+        const subtract = (a, b) => a - b;
+
+        // 箭头函数单参数可省略括号
+        const square = x => x * x;
+
+        // 4. 对象方法简写
+        const calculator = {
+            name: 'MyCalc',
+            // ES6之前
+            add: function(a, b) {
+                return a + b;
+            },
+            // ES6简写方式
+            subtract(a, b) {
+                return a - b;
+            }
+        };
+
+        // 5. 类中的方法
+        class MathUtil {
+            // 实例方法
+            add(a, b) {
+                return a + b;
+            }
+
+            // 静态方法
+            static multiply(a, b) {
+                return a * b;
+            }
+        }
+
+        // 函数调用
+        console.log(add(5, 3)); // 8
+        console.log(multiply(4, 2)); // 8
+        console.log(divide(10, 2)); // 5
+        console.log(subtract(10, 5)); // 5
+        console.log(square(4)); // 16
+        console.log(calculator.add(5, 3)); // 8
+        console.log(calculator.subtract(10, 5)); // 5
+
+        const math = new MathUtil();
+        console.log(math.add(5, 3)); // 8 (实例方法)
+        console.log(MathUtil.multiply(4, 2)); // 8 (静态方法)
+
+        // 1. 默认参数
+        function greet(name = 'Guest') {
+            return `Hello, ${name}!`;
+        }
+        console.log(greet()); // "Hello, Guest!"
+        console.log(greet('John')); // "Hello, John!"
+
+        // 2. 剩余参数
+        function sum(...numbers) {
+            return numbers.reduce((total, num) => total + num, 0);
+        }
+        console.log(sum(1, 2, 3, 4)); // 10
+
+        // 3. 立即执行函数（IIFE）
+        (function() {
+            console.log('立即执行');
+        })();
+
+        // 4. 生成器函数
+        function* numberGenerator() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+        const gen = numberGenerator();
+        console.log(gen.next().value); // 1
+
+        // 5. async函数
+        async function fetchData() {
+            try {
+                const response = await fetch('https://api.example.com/data');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>

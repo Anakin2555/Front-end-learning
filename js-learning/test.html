@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script>
+
+
+        // let x,y;
+        // x = 80- undefined;
+        // y = 10+null;
+        // console.log(x,y)
+        // const obj={
+        //     name:'anakin'
+        // }
+        // const obj2=obj;
+        // obj2.name='bob';
+        // console.log(obj)
+
+ 
+        
+        // 面向对象
+        class Person{
+            constructor(name,age) {
+                this.name=name;
+                this.age=age;
+            }
+
+            sayHello(){
+                console.log('hello, I am'+this.name);
+            }
+            
+            eat(){
+                console.log('I eat dinner');
+            }
+        }
+        class Student extends Person{
+            
+        }
+        
+        const person1=new Person('anakin',24)
+        const person2=new Student('bob',22)
+        console.log(Person.prototype)
+        console.log(person1)
+        console.log(person2)
+        
+        function test(name){
+            this.name=name
+            
+            // 不建议这样添加方法属性
+            // this.sayHello=function(){
+            //     console.log('hello'+',I am '+ this.name)
+            // }
+        }
+        const test1=new test('anakin')
+        
+        
+        // 数组
+        let arr=new Array(3).fill(0)
+        arr.length=4
+        console.log(arr)
+        
+        
+        let arr2=['nih','ana','bob']
+        for(let x in person1){
+            console.log(x)
+        }
+        
+        
+        
+        // 类型自动转换
+        let array='012'
+        let letters=['abc','efg','hij']
+        for(let item of array){
+            console.log(item)
+            console.log(letters[item])
+        }
+
+
+
+        
+        
+        
+        
+        
+    </script>
+
+
+</head>
+
+<body>
+<ul>
+    
+</ul>
+</body>
+
+</html>

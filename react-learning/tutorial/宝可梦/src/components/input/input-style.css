@@ -1,0 +1,14 @@
+.input-component{
+    height: 30px;
+    width: 400px;
+    background-color: #393838;
+    border-radius: 8px;
+    padding-left: 8px;
+    border: 2px solid #8a8a8a;
+    color: white;
+    
+}
+
+.input-component::placeholder{
+    color: #9f9f9f;
+}

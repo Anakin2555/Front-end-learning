@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker Demo</title>
+</head>
+
+<body>
+    <h1>Web Worker 示例</h1>
+    <button onclick="startCalculation()">开始计算</button>
+    <div id="result"></div>
+
+    <script>
+        // 创建一个 Web Worker
+        const worker = new Worker('worker.js'); // 创建一个 Web Worker
+
+        function startCalculation() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = '计算中...';
+            worker.postMessage(100000000000); // 发送一个大数字给 Worker
+        }
+
+        // 接收来自 Web Worker 的消息
+        worker.onmessage = function(event) {
+            document.getElementById('result').textContent =
+                `计算结果: ${event.data}`;
+        };
+    </script>
+
+
+</body>
+
+</html>

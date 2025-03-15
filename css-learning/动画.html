@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CSS Animation</title>
+    <style type="text/css">
+        .container {
+            border: 1px solid #eee;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        @keyframes text-scroll {
+            0% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .text {
+            animation: text-scroll 5s linear infinite;
+        }
+        
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #3498db;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .box:hover {
+            width: 200px;
+            background: #2ecc71;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">循环滚动播放滴滴答答滴滴答答滴滴答答</div>
+        <div>
+        </div>
+        <div class="box"></div>
+</body>
+
+</html>
